@@ -18,9 +18,9 @@ func main() {
 }
 
 func registerService(r *gin.Engine, service string) {
-	products := r.Group("/" + service)
+	proxyGroup := r.Group("/" + service)
 	{
-		products.Any("/*path", handlers.NewProxy(service))
-		products.Any("", handlers.NewProxy(service))
+		proxyGroup.Any("/*path", handlers.NewProxy(service))
+		proxyGroup.Any("", handlers.NewProxy(service))
 	}
 }
